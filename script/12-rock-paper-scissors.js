@@ -11,24 +11,26 @@ let score = JSON.parse(localStorage.getItem('score'));
         let isautoplay = false;
         let intervalId;
         let Autoplay = document.getElementById("Autoplay");
-        function autoplay(){            
-                // Add event listener to the button
-                Autoplay.addEventListener("click", function() {
-                // Change the button text content
-                Autoplay.textContent = "Stop Autoplay";
-                });
-            if(!isautoplay){                
-                intervalId = setInterval(function(){
-                    const PlayerMove = ComputerMove();
-                    GamePlay(PlayerMove);
-                },1000);
-                isautoplay = true;                
-            }
-            else{
-                clearInterval(intervalId);
-                isautoplay = false;
-            }
-        }
+        function autoplay(){
+                
+            Autoplay.addEventListener("click", function() {
+                // Change the button text content immediately upon click
+                if(!isautoplay){  
+                    Autoplay.textContent = "Stop Auto Play";              
+                    intervalId = setInterval(function(){
+                        const PlayerMove = ComputerMove();
+                        GamePlay(PlayerMove);
+                    },1000);
+                    isautoplay = true;                
+                }
+                else{
+                    Autoplay.textContent = "Auto Play";
+                    clearInterval(intervalId);
+                    isautoplay = false;
+                }
+            }           
+            )
+        };
         function GamePlay(PlayerMove){
             let result = '';
             const ComputerPick = ComputerMove()
